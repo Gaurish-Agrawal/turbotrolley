@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Trolley</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="static/icons/trolleylogo.jpg">
+
+    <style type="text/css">
+        .content-desktop {display: block;}
+        .content-mobile {display: none;}
+        @media screen and (max-width: 768px) {
+        .content-desktop {display: none;}
+        .content-mobile {display: block;}
+        }
+
+        #search-bar {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#results-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.result-item {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 10px 0;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease;
+    cursor: pointer;
+}
+
+.result-title {
+    font-size: 1.5em;
+    color: #333;
+    margin: 0;
+}
+
+.result-details {
+    font-size: 1em;
+    color: #666;
+    margin-top: 5px;
+}
+
+    </style>
+
+</head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+<body>
+
+    <script>
+        AOS.init();
+    </script>
+
+    <div class="container">
+
+
+        <div class="header-center">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/about">
+                            <img src="{{ url_for('static', filename='icons/trolleylogo.jpg') }}" alt="logo" width="60" height="60">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+        <h1>Find Your Supermarket</h1>
+        <input type="text" id="search-bar" placeholder="Search for supermarkets..." onkeyup="filterResults()">
+        <div id="results-list" style="display: none;"></div>
+        <br>
+        <a href="/createastore" style="color: gray">Add your store</a>
+    </div>
+
+    
+
+
+    <script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+</html>

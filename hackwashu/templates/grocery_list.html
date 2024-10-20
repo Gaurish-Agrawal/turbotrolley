@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Navigation</title>
+    <link rel="icon" href="static/icons/trolleylogo.jpg">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+<style>
+
+:root {
+  --applegray: rgb(139, 187, 139);
+}
+
+
+       
+        .input-group-code input[type="text"],
+        .input-group-code input[type="number"] {
+            font-size: 16px;
+            border: 0px;
+            height: 40px;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-top: 20px;
+            border: 1px solid white;
+            border-radius: 4px;
+            height: 40px;
+            box-sizing: border-box;
+        }
+
+        #add-item {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .submit-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .submit-group button {
+            background-color: white;
+            color: black;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+            width: 90%;
+            height: 50%;
+            border-radius: 10px;
+            border: 1px solid black;
+            position: relative;
+        }
+
+        .white-black-button {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .styled-div {
+            color: black; /* Black text color */
+            border-radius: 10px; /* Rounded corners */
+            padding: 1px; /* Padding on all four sides */
+            background-color: var(--applegray);
+            position: relative;
+        }
+
+         .image-container {
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 2px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .table-container {
+            width: 100%;
+            max-height: 300px; /* Set a fixed height for the table container */
+            overflow-y: auto; /* Make it scrollable if content overflows */
+            background-color: white;
+            border: 1px solid var(--applegray);
+            border-radius: 10px;
+            padding: 10x;
+            box-sizing: border-box;
+            border: 1px solid black;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid var(--applegray);
+            padding: 8px;
+            text-align: left;
+            background-color: white;
+        }
+
+
+        #grocery-table th, #grocery-table td{
+            padding: 10px;
+            text-align: center;
+        }
+
+
+        input#file {
+                                display: inline-block;
+                                padding: 60px 0 0 0;
+                                height: 50px;
+                                width: 80%;
+                                overflow: hidden;
+                                -webkit-box-sizing: border-box;
+                                -moz-box-sizing: border-box;
+                                box-sizing: border-box;
+                                background: url('static/icons/camicon3.png') center center no-repeat var(--applegray);
+                                border-radius: 5px;
+                                border: 1px solid black;
+                                background-size: 60px 60px;
+        }
+
+        #hiddenelement {
+            display: none;
+            background-color: rgba(117, 255, 131, 0.35);
+        }
+
+    </style>
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{{ url_for('static', filename='javascript/grocery.js') }}"></script>
+</head>
+
+
+
+<body>
+    
+<script>
+        AOS.init();
+</script>
+
+
+    <div class="container">
+
+        <h3>
+            <button style="border: none; background-color: white;" onclick="window.location.href='/'">
+                <span style="font-size: 35px;">&#8592;</span>
+            </button>
+            {{name}}
+        </h3>
+        <br>
+
+<center>
+
+    <div class="input-group"> 
+
+        <div class="table-container">
+            <div id="grocery-table-container">
+                <table id="grocery-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Action</th>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                AOS.init();
+    
+                function renderTable() {
+                    const items = JSON.parse('{{ itemstoadd|tojson|safe }}');
+                    const tableBody = document.querySelector('#grocery-table tbody');
+                    tableBody.innerHTML = '';
+    
+                    items.forEach((item, index) => {
+                        const row = tableBody.insertRow();
+                        const cell1 = row.insertCell(0);
+                        const cell3 = row.insertCell(1);
+                        cell1.textContent = item.item;
+                        cell3.innerHTML = `<button onclick="deleteRow(this)" style="border: none; background-color: white;">
+                            <span style="font-size: 20px; color: darkgreen;font-weight: bold;">&#10005;</span></button>`;
+                    });
+                }
+    
+                renderTable();
+            });
+    
+            function deleteRow(button) {
+                const row = button.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            }
+        </script>
+
+
+
+        <table style="width: 100%; border-collapse: collapse; border: none;">
+            <tr>
+                <td style="padding: 5px; width: 80%; border: none;"> 
+                    <select id="item-input" class="dropbtn white-black-button">
+                        <option value="" disabled selected>Select item</option>
+                            {% for item in items %}
+                                <option value="{{item}}">{{ item }}</option>
+                            {% endfor %}
+                    </select>
+                </td>
+                
+                <td style="padding: 2px; width: 20%; border: none;">
+                    <button id="submit-items" class="white-black-button" onclick="updateImage()"
+                    style="width: 100%; padding: 10px;">
+                        <i class="fa fa-check" style="color: darkgreen"></i>
+                    </button>
+                </td>
+            </tr>
+        </table>
+
+
+        <div style="padding: 2px; border: none;">
+            <button id="add-item" style="width: 100%; padding: 10px;">
+                            Add Selected Item!
+            </button>
+        </div>
+
+
+
+
+
+        <br>
+</div>
+    </center>
+
+
+
+
+
+
+        <center>
+            <div class="input-group"> 
+            
+
+                
+            
+            
+                <div>
+                    <div class="row">
+                            <p>
+                                {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    <ul>
+                                    {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% endwith %}
+                            </p>
+                            {% if filename %}
+                                <div>
+                                    <img src="{{ url_for('display_image', filename=filename) }}">
+                                </div>
+                            {% endif %}
+
+
+                        
+                            <script>
+
+                                        document.getElementById('shareButton').addEventListener('click', async () => {
+                                            const imageUrl = 'static/newimage.png'; // Replace with your image URL
+                                            alert('here');
+                                            
+                                            try {
+                                                const response = await fetch(imageUrl);
+                                                const blob = await response.blob();
+                                                const file = new File([blob], 'image.png', { type: 'image/png' });
+
+                                                if (navigator.share) {
+                                                    await navigator.share({
+                                                        title: 'Check out this image!',
+                                                        text: 'Here is an awesome image I found.',
+                                                        files: [file]
+                                                    });
+                                                    console.log('Image shared successfully');
+                                                } else {
+                                                    console.log('Web Share API not supported in this browser.');
+                                                }
+                                            } catch (error) {
+                                                alert('Error sharing image:', error);
+                                            }
+                                        });
+
+
+                                        function copyText(){
+
+                                            var elem = document.getElementById("hiddenelement");
+                                            elem.style.display = "block";
+                                            
+                                            setTimeout(function(){
+                                                elem.style.display = "none";
+                                            }, 3000);
+
+                                            var text = document.getElementById("item-order-label-copy").innerHTML;
+
+                                            var dummy = document.createElement("textarea");
+                                            document.body.appendChild(dummy);
+                                            dummy.value = "My Shopping List"+"\n"+ text;
+                                            dummy.select();
+                                            document.execCommand("copy");
+                                            document.body.removeChild(dummy);
+
+                                        }
+
+                            </script>
+
+                            <div id="item-order-label-copy" style="display: none;">{{copy}}</div>
+                                
+                        <div class="input-group"> 
+                            
+                                <table style="width: 100%; border-collapse: collapse; border: none;">
+                                    
+                                    <form method="post" action="/u" enctype="multipart/form-data">
+
+
+                                    <tr>
+                                        <td colspan="4" style="border: none;">
+                                            
+                                            <input id="file" type="file" name="file" style="width: 100%;"/>
+                                     
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td style="padding: 5px; width: 60%; border: none;"> 
+                                            <form method="post" action="/u" enctype="multipart/form-data">
+                                            <button class="white-black-button" onclick="updateImageFromImage()" 
+                                            type="submit" value="Submit" style="width: 100%; padding: 10px;">
+                                                Upload
+                                            </button>
+                                           
+                                        </td>
+                                    </form>
+
+                                        <td style="padding: 2px; width: 20%; border: none;">
+                                            <button class="white-black-button" onclick="copyText()"
+                                            style="width: 100%; padding: 10px;">
+                                                <i class="fa fa-copy" style="color: darkgreen"></i>
+                                            </button>
+                                        </td>
+
+                                        
+
+                                        <td style="padding: 2px; width: 20%; border: none;">
+
+                                            <button class="white-black-button"  style="width: 100%; padding: 10px;">
+                                                <a id="shareButton" href="static/newimage.png" download>
+                                                    <i class="fa fa-share" style="color: darkgreen"></i>
+                                                </a>
+                                            </button>
+
+                                            
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+
+                        <div style="padding: 2px; border: none;">
+                            <p id="hiddenelement" class="white-black-button">List Copied</p>
+                        </div>
+
+
+                    </div>
+            </div>
+            </div>
+
+            
+
+        </center>
+
+
+
+        <br>
+
+
+
+        <div class="styled-div">
+            <br>
+
+           <nav>
+                    <ul>
+                        <li>
+                            <img id="store-diagram" src="{{ url_for('static', filename='stores/{}.png'.format(address)) }}" alt="No Image">
+                        </li>
+                    </ul>
+            </nav>
+
+            <p id="notFounds" style="color: black"></p>
+            <h3 id="item-order-label" style="color: black;"></h3>
+        </div>
+
+    </div>
+    
+</body>
+</html> 

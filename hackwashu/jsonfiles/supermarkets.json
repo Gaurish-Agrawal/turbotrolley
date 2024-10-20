@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Target",
+        "location": "1750 Story Rd, San Jose, CA"
+    },
+    {
+        "name": "Target",
+        "location": "3155 Silver Creek Rd, San Jose, CA"
+    },
+    {
+        "name": "Walmart",
+        "location": "6067 N Ridge Rd, Madison, OH"
+    },
+    {
+        "name": "Walmart",
+        "location": "777 Story Road, San Jose, CA"
+    },
+    {
+        "name": "New India Bazaar",
+        "location": "2850 Quimby Rd, San Jose, CA"
+    },
+    {
+        "name": "Sample Store",
+        "location": "101 Shepley Drive, Saint Louis, MO"
+    },
+    {
+        "name": "Paws And Go",
+        "location": "101 Shepley Drive, Saint Louis, MO"
+    }
+]

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Setup</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="static/icons/trolleylogo.jpg">
+
+    <style type="text/css">
+        .content-desktop {display: block;}
+        .content-mobile {display: none;}
+        @media screen and (max-width: 768px) {
+        .content-desktop {display: none;}
+        .content-mobile {display: block;}
+        }
+
+        #store-form {
+            width: 80%;
+            padding: 20px;
+            background: #fff;
+            border: none;
+            border-radius: 12px;
+            box-shadow: none
+        }
+
+        #store-form input[type="text"], #store-form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #store-form button:hover {
+            background-color: #45a049;
+        }
+
+        label{
+            margin-bottom: 10px;
+        }
+
+        .white-black-button {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        #storefile {
+            background-color: white;
+            color: black;
+            border: 1px solid black;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+
+    display: inline-block;
+}
+
+button:hover {
+    background-color: rgb(104, 178, 104);
+    color: black;
+}
+
+    </style>
+</head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://code.iconify.design/2/2.1.2/iconify.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<body>
+
+    <script>
+        AOS.init();
+    </script>
+
+    <div class="container">'
+        
+        <center>
+        <div class="header-center">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/about">
+                            <img src="{{ url_for('static', filename='icons/trolleylogo.jpg') }}" alt="logo" width="60" height="60">
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <h1>
+            Add Your Store
+        </h1>
+
+        
+            <form id="store-form" method="post" action="/submit-store" enctype="multipart/form-data">
+
+                    <input type="text" id="store-name" name="store_name" placeholder="Enter store name" required>
+    
+    
+                    <input type="text" id="store-address" name="store_address" placeholder="Enter store address" required>
+    
+                
+                    <input type="file" id="storefile" name="store_image" style="width: 100%;" required/>
+
+                    
+                    <button class="white-black-button" onclick="window.location.href='/'">Return</button>
+                    <button class="white-black-button" type="submit">Next</button>
+    
+            </form>
+        </center>
+
+    </div>
+    
+    <script src="{{ url_for('static', filename='javascript/script.js') }}"></script>
+</body>
+</html>
